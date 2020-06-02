@@ -108,8 +108,8 @@ find_package(orocos_kdl REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
-#  CATKIN_DEPENDS Eigen3 kdl_parser orocos_kdl roscpp
+  LIBRARIES ${PROJECT_NAME} 
+  CATKIN_DEPENDS kdl_parser roscpp
 #  DEPENDS system_lib
 )
 
@@ -124,6 +124,8 @@ include_directories(
   /usr/include/
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
+  ${orocos_kdl_INCLUDE_DIRS}
+  ${kdl_parser_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -155,7 +157,11 @@ add_library(${PROJECT_NAME}
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-
+target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  ${orocos_kdl_LIBRARIES}
+  ${kdl_parser_LIBRARIES}
+)
 #############
 ## Install ##
 #############
